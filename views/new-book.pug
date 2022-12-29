@@ -5,9 +5,9 @@ block content
 
   h1 New Book
 
-  include form-error 
   
   form(action="/books/new", method="post")
+    include form-error 
     p
         label(for="title") Title 
         input(type="text" name='title' id='title') 

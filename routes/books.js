@@ -22,7 +22,7 @@ router.get('/', asyncHandler(async (req, res) => {
 
 //new book form
 router.get('/new', asyncHandler(async(req, res) => {
-    res.render('new-book', { books, title: "New Book"})
+    res.render('new-book')
 }))
 
 
