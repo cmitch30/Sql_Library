@@ -7,6 +7,7 @@ var indexRouter = require("./routes/index");
 const sequelize = require("./models/index").sequelize;
 const bookRouter = require('./routes/books')
 
+
 var app = express();
 
 sequelize.authenticate().then(() => {
@@ -32,22 +33,23 @@ app.use("/books", bookRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error("Not Found");
-  err.status = 404;
-  next(err);
+  const err = new Error();
+  err.statusCode = 404;
+  err.message = "Hmm... that page doesn't seem to exist :/";
+  res.render("page-not-found", { title: "Page Not Found", err });
 });
 
 // error handler
 app.use((err, req, res, next) => {
-  if (err) {
-    console.log("Global error handler called", err);
-  }
-  if (err.status === 404) {
-    res.status(404).render("page-not-found", { err });
-  } else {
-    err.status = res.statusCode === 200 ? 500 : res.statusCode;
-    res.status(err.status).render("error", { err });
-  }
+  err.status = err.status ? err.status : 500;
+  err.message = err.message
+    ? err.message
+    : "Sorry! There was an unexpected error on the server.";
+
+  console.log(err.status, err.message);
+
+  res.status(err.status);
+  res.render("error", { title: "Page Not Found", err });
 });
 
 module.exports = app;

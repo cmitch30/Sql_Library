@@ -61,7 +61,9 @@ router.get(
     if (book) {
       res.render("update-book", { book, title: book.title });
     } else {
-      res.sendStatus(404);
+      const err = new Error();
+      err.status = 404;
+      res.render("page-not-found", { title: "Page Not Found", err });
     }
   })
 );
@@ -77,7 +79,9 @@ router.post(
         await book.update(req.body);
         res.redirect("/");
       } else {
-        res.sendStatus(404);
+        const err = new Error();
+        err.status = 404;
+        res.render("page-not-found", { title: "Page Not Found", err });
       }
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
