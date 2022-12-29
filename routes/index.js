@@ -16,7 +16,15 @@ function asyncHandler(cb) {
 
 
 /* GET home page. */
-router.get('/', asyncHandler(async(req, res, next) => {
-const book = Book.findAll().then(res => res.json())
-}));
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const books = await Book.findAll();
+    console.log(books)
+    res.render("index", {
+      book: books,
+      title: "Books",
+    });
+  })
+);
 module.exports = router;

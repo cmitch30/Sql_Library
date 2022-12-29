@@ -9,16 +9,14 @@ const sequelize = require("./models/index").sequelize;
 
 var app = express();
 
-sequelize
-  .authenticate()
-  .then(() => {
+sequelize.authenticate().then(() => {
     console.log("Connection has been established successfully.");
   })
   .catch((err) => {
     console.log("Error connecting:", err);
   });
 
-sequelize.sync({ force: true});
+sequelize.sync();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
