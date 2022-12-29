@@ -2,7 +2,8 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+const { Sequelize } = require('sequelize');
+module.exports = (sequelize) => {
   class Book extends Model {
     /**
      * Helper method for defining associations.
@@ -15,8 +16,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Book.init(
     {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       title: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notEmpty: {
@@ -25,16 +31,16 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       author: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
-        validate : {
+        validate: {
           notEmpty: {
-            msg: '"Author" is required'
-          }
-        }
+            msg: '"Author" is required',
+          },
+        },
       },
-      genre: DataTypes.STRING,
-      year: DataTypes.INTEGER,
+      genre: Sequelize.STRING,
+      year: Sequelize.INTEGER,
     },
     {
       sequelize,
