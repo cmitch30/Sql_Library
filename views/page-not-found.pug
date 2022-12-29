@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  nav.nav
+    a(href='/')
+      span &larr;
+      |  Back
+  article
+    .box
+      h1 Page Not Found
+      h3= err.status

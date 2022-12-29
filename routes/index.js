@@ -1,7 +1,6 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const Book = require('../models').Book
-
+const Book = require("../models").Book;
 
 function asyncHandler(cb) {
   return async (req, res, next) => {
@@ -14,17 +13,8 @@ function asyncHandler(cb) {
   };
 }
 
-
 /* GET home page. */
-router.get(
-  "/",
-  asyncHandler(async (req, res) => {
-    const books = await Book.findAll();
-    console.log(books)
-    res.render("index", {
-      book: books,
-      title: "Books",
-    });
-  })
-);
+router.get("/", (req, res) => {
+  res.redirect('/books')
+});
 module.exports = router;
