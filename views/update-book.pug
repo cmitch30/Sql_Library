@@ -3,9 +3,9 @@ extends layout
 block content
   h1 Update Book
 
+  include form-errors
 
   form(method="post")
-  include form-error
     p
         label(for="title") Title
         input(type="text" name='title' id='title' value= book.title)

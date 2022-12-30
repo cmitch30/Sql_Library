@@ -7,7 +7,7 @@ block content
 
   
   form(action="/books/new", method="post")
-  include form-error 
+    include form-errors 
     p
         label(for="title") Title 
         input(type="text" name='title' id='title') 
