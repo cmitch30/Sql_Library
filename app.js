@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var indexRouter = require("./routes/index");
-const sequelize = require("./models/index").sequelize;
+const sequelize = require("./models/index").sequelize
 const bookRouter = require('./routes/books')
 
 
